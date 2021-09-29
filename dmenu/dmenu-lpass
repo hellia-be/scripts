@@ -1,0 +1,9 @@
+#!/bin/bash
+
+. $HOME/.config/dmenu/.dmenurc
+
+selection=`echo -e $(lpass ls | awk -F '[/[]' '{print $(NF-1)"\\\n")' | sort) | dmenu $DMENU_OPTIONS`
+
+if [ "$selection" != "" ]; then
+	lpass show -c --password $selection &
+fi
